@@ -1,0 +1,124 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	#box{
+		width: 875px;
+		height: 553px;
+		background: url(img/bg.png) no-repeat;
+		margin: 0 auto;
+		position: relative;
+	}
+	img{
+		position: absolute;
+		top: 114px;
+		height: 245px;
+		cursor: pointer;
+	}
+	#box img:nth-of-type(1){
+		width:448px;
+		left: 49px;
+	}
+	#box img:nth-of-type(2){
+		width: 248px;
+		left:559px;
+	}
+	i{
+		position: absolute;
+		bottom: 143px;
+		font-weight: bold;
+	}
+	#box i:nth-of-type(1){
+		left: 49px;
+	}
+	#box i:nth-of-type(2){
+		right: 297px;
+	}
+	a{
+		position: absolute;
+		top:54px;
+		width: 60px;
+		height: 20px;
+	}
+	#box a:nth-of-type(1){
+		left:23px;
+	}
+	#box a:nth-of-type(2){
+		left: 100px;
+	}
+	p{
+		height: 20px;
+		width: 200px;
+		position: absolute;
+		bottom: 150px;
+		text-align: center;
+	}
+	#box p:nth-of-type(1){
+		left: 136px;
+	}	
+	#box p:nth-of-type(2){
+		width: 130px;
+		left: 634px;
+	}
+</style>
+</head>
+
+<body>
+	<div id="box">
+		<a href="javascript:;" id="left"></a>
+		<a href="javascript:;" id="right"></a>
+		<img src="" alt="" class="imgLeft" id="img"/>
+		<img src="" alt="" class="imgRight"/>
+		<i class="left"></i>
+		<i class="right"></i>
+		<p class="left"></p>
+		<p class="right"></p>
+	</div>
+</body>
+</html>
+<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var arrLeft = ['img/0.jpg','img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];
+	var arrRight = ['img/2.jpg','img/3.jpg','img/4.jpg'];
+	var arrTxt1 = ['左一','左二','左三','左四','左五'];
+	var arrTxt2 = ['右一','右二','右三'];
+	var n = 0;
+	var m = 0;
+	tabLeft();
+	tabRight();
+	function tabLeft(){
+		$('.imgLeft').attr('src',arrLeft[n%arrLeft.length]);
+	}
+	function tabRight(){
+		$('.imgRight').attr('src',arrRight[m%arrRight.length]);
+	}
+	$('.imgLeft').click(function(){
+		n++;
+		tabLeft();
+	});
+	$('.imgRight').click(function(){
+		m++;
+		tabRight();
+	});
+	$('#right').click(function(){
+		n++;
+		m++;
+		tabLeft();
+		tabRight();
+	});
+	$('#left').click(function(){
+		
+		if(n<=0){
+			n=arrLeft.length;
+		}
+		if(m<=0){
+			m=arrRight.length;
+		}
+		n--;
+		m--;
+		tabLeft();
+		tabRight();
+	});
+</script>
