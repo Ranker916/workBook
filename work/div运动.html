@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				height:100px;
+				border:1px solid #000;
+				background:red;
+				position: absolute;
+				left:7px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮" id="btn"/>
+		<div id="box"></div>
+		<script src="Mtween.js"></script>
+		<script>
+			var btn = document.getElementById('btn');
+			var box=document.getElementById('box');
+			var n=0;
+			var onOff=true;
+//			btn.onclick=function(){
+//				move({
+//					obj:box,
+//					attrs:{left:400},
+//					duration:3000,
+//					callBack:function(){
+//						btn.onclick=function(){
+//							n++;
+//							if(n==5){
+//								fn();
+//							}
+//						}
+//					}
+//				})
+//			}
+//			function fn(){
+//				move({
+//					obj:box,
+//					attrs:{left:7},
+//					duration:3000
+//				})
+//			}
+		btn.onclick=function(){
+			if(n%5==0){
+				fn();
+				}
+			n++;
+			}
+			function fn(){
+				move({
+					obj:box,
+					attrs:{left:onOff?400:7},
+					duration:1000,
+					callBack:function(){
+						onOff=!onOff;
+						if(n%5==0){
+							fn();
+							}
+						}
+					})
+				console.log(n)
+			}
+		</script>
+	</body>
+</html>
