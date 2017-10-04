@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li class="li li1"></li>
+			<li class="li li1"></li>
+			<li class="li li_2"></li>
+			<li class="li li_2"></li>
+		</ul>
+		<script type="text/javascript">
+			var ul = document.getElementsByTagName('ul')[0];
+			function getByClass(sClass){
+				var arr = [];
+				var aEle = document.getElementsByTagName('*');
+				var re = new RegExp('\\b'+sClass+'\\b');
+				for(var i=0;i<aEle.length;i++){
+					if(re.test(aEle[i].className)){
+						arr.push(aEle[i]);
+					}
+				}
+				return arr;
+			}
+			var lis = getByClass('li_2');
+//			console.log(lis)
+			for(var i=0;i<lis.length;i++){	
+				lis[i].style.background = 'red';
+			}
+		</script>
+	</body>
+</html>
