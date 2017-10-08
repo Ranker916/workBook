@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="txt" value="" />
+		<input type="button" id="btn" value="提交" />
+		<ul id="list">
+			
+		</ul>
+		<script type="text/javascript">
+			var txt = document.getElementById('txt');
+			var btn = document.getElementById('btn');
+			var list = document.getElementById('list');
+			var arr = ['草','你妹','艹','sb','傻逼']
+			var str = arr.join('|');
+			btn.onclick = function(){
+				var val = txt.value;
+				var re = new RegExp(str,'g')
+				var v = val.replace(re,function($0){
+					switch ($0){
+						case '草':
+							return '*'
+							break;
+						case '你妹':
+							return '**'
+							break;
+						case '艹':
+							return '*'
+							break;
+						case 'sb':
+							return '**'
+							break;
+						case '傻逼':
+							return '**'
+							break;
+					}
+				})
+				var lis = document.createElement('li');
+				list.appendChild(lis);
+				lis.innerHTML = v;
+				txt.value = '';
+			}
+		</script>
+	</body>
+</html>
