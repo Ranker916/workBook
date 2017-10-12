@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.red {
+				border: 1px solid #FF0000; 
+			}
+			.green {
+				border: 1px solid #00ff00;
+			}
+		</style>
+	</head>
+	<body>
+		用户名:<input type="text" id="user" /><span id="span"></span>
+	<script type="text/javascript">
+		var user = document.getElementById('user');
+		var span = document.getElementById('span');
+		
+		user.onblur = function(){
+			const ajax = new XMLHttpRequest;
+			ajax.open('get','php/get_json.php?user='+user.value);
+			ajax.send();
+			ajax.onload = function(){
+				var data = JSON.parse(ajax.responseText);
+				if(data.code){
+					user.className = 'red';
+				}else{
+					user.className = 'green';
+				}
+				span.innerHTML = data.msg;
+				
+			}
+		}
+	</script>
+	</body>
+</html>
