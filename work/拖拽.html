@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box1 {
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				background: red;
+				top:0;
+				left: 0;
+			}
+			#box2 {
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				background: #000;
+				top:200px;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<script type="text/javascript">
+			var box1 = document.getElementById('box1');
+			var box2 = document.getElementById('box2');
+			function drag(obj){
+				obj.onmousedown = function(ev){
+					//去除文字默认
+					ev.preventDefault();
+					var disX = ev.clientX-obj.getBoundingClientRect().left;
+					var disY = ev.clientY-obj.getBoundingClientRect().top;
+					//移动
+					document.onmousemove = function(ev){
+						var l = ev.clientX-disX;
+						var t = ev.clientY-disY;
+						obj.style.left = l+'px';
+						obj.style.top = t+'px';
+					}
+					//抬起
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+					}
+				}
+			}
+			drag(box1);
+			drag(box2);
+		</script>
+	</body>
+</html>
