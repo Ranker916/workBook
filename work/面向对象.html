@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+//			function fn(name,age){//构造函数、工厂类函数
+////				var obj = {};//原材料
+//				//加工
+//				this.name = name;
+//				this.age = age;
+//				this.say = function(){
+//					alert('我的名字'+this.name)
+//				}
+////				return obj;
+//			}
+//			var t1 = new fn('陈斌',80);
+//			t1.say();
+//			console.log(t1)
+Object.prototype.say = function(){
+	alert('这是obj下的gay:小钟钟')
+}
+function Fn(name){
+	this.name = name;
+}
+//Fn.prototype.say = function(){
+//	alert('zheshifnsay')
+//}
+var t1 = new Fn('小钟钟');
+t1.say();
+console.dir(t1)
+		</script>
+	</body>
+</html>
