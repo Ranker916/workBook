@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var min = -Infinity;
+			var s = '';
+			var str = 'asdasdhacmaklhcuhcklnxjchzkxmcklzxcajsmxklczxijckmkjaiocczmncckjzcoijknachizclka';
+			console.log(str.split(''))
+			str = str.split('').sort().join('');
+			console.log(str);
+			str.replace(/(\w)\1+/g,function($0,$1){	
+				if(min<$0.length){
+					min=$0.length;
+					s = $1;
+				}
+//				console.log($0)
+			})
+			console.log(min,s)
+		</script>
+	</body>
+</html>
