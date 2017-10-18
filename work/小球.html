@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		div {
+			border-radius: 50%;
+			position: absolute;
+		}
+	</style>
+	<body>
+		<input type="button" id="btn" value="按钮" />
+		<script type="text/javascript">
+			var btn = document.getElementById('btn');
+			var arr = [];
+			var body = document.body;
+			function color(){
+				var arr = ['red','orange','yellow','green','gray','blue','purple'];
+				return arr[Math.round(Math.random()*(arr.length-1))]
+			}
+			function size(){
+				return Math.round(Math.random()*50+200);
+			}
+			document.onclick = function(ev){
+				if(ev.target == btn){
+					if (arr.length) {
+						big(arr.pop())
+					}
+				} else{
+					arr.push({
+						x:ev.clientX,
+						y:ev.clientY
+					})
+				}
+			}
+			function big(pos){
+				var div = document.createElement('div');
+				var target = size();
+				var w = 0;
+				div.style.background = color();
+				body.appendChild(div);
+				div.timer = setInterval(function(){
+					div.style.width = ++w+'px';
+					div.style.height = ++w+'px';
+					div.style.left = pos.x-w/2+'px';
+					div.style.top = pos.y-w/2+'px';
+					if (w>=target) {
+						clearInterval(div.timer)
+						if (arr.length) {
+							big(arr.pop());
+						}
+					}
+				},20)
+			}
+		</script>
+	</body>
+</html>
