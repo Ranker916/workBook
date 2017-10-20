@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			span{
+				float: left;
+				width: 100px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border: 1px solid #000;
+			}
+			.active{
+				background: red;
+			}
+			div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid #000;
+				position: absolute;
+				top:50px;
+				left:8px;
+				display: none;
+			}
+			.show{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="active">按钮1</span>
+		<span>按钮2</span>
+		<span>按钮3</span>
+		<div class="show">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+		<script type="text/javascript">
+			/*
+			 	1.点击第一个span，让第一个div显示
+			 * 
+			 * */
+			var btns = document.getElementsByTagName('span');
+			var divs = document.getElementsByTagName('div');
+			//第一个span点击
+//			btns[0].index = 0;
+//			btns[0].onclick = function(){
+//				btns[0].className = '';
+//				btns[1].className = '';
+//				btns[2].className = '';
+//				divs[0].className = '';
+//				divs[1].className = '';
+//				divs[2].className = '';
+//				//清除所有span颜色，div都隐藏
+////				for(var i=0;i<btns.length;i++){
+////					btns[i].className = '';
+////					divs[i].className = '';
+////				}
+//				btns[0].className = 'active';
+//				divs[0].className = 'show';
+////				this.className = 'active';
+////				divs[this.index].className = 'show';
+//			}
+//			btns[1].index = 1;
+//			btns[1].onclick = function(){
+//				btns[0].className = '';
+//				btns[1].className = '';
+//				btns[2].className = '';
+//				divs[0].className = '';
+//				divs[1].className = '';
+//				divs[2].className = '';
+//				//清除所有span颜色，div都隐藏
+////				for(var i=0;i<btns.length;i++){
+////					btns[i].className = '';
+////					divs[i].className = '';
+////				}
+//				btns[1].className = 'active';
+//				divs[1].className = 'show';
+////				this.className = 'active';
+////				divs[this.index].className = 'show';
+//			}
+//			btns[2].index = 2;
+//			btns[2].onclick = function(){
+//				btns[0].className = '';
+//				btns[1].className = '';
+//				btns[2].className = '';
+//				divs[0].className = '';
+//				divs[1].className = '';
+//				divs[2].className = '';
+//				//清除所有span颜色，div都隐藏
+////				for(var i=0;i<btns.length;i++){
+////					btns[i].className = '';
+////					divs[i].className = '';
+////				}
+//				btns[2].className = 'active';
+//				divs[2].className = 'show';
+////				this.className = 'active';
+////				divs[this.index].className = 'show';
+//			}
+			//for循环等价于上边的，觉得麻烦，重复的事就用循环做
+			for(var i=0;i<btns.length;i++){
+				//想找到对应的div，所以用索引值
+				btns[i].index = i;
+				btns[i].onclick = function(){
+					for(var i=0;i<btns.length;i++){
+						btns[i].className = '';
+						divs[i].className = '';
+					}
+					//this就是点击的那个span
+					this.className = 'active';
+					divs[this.index].className = 'show';
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>
