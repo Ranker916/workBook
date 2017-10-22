@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			span{
+				float: left;
+				width: 131px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border: 1px solid #fff;
+				color: #fff;
+			}
+			#box .active{
+				background: red;
+			}
+			#box div{
+				width: 360px;
+				height: 340px;
+				border: 1px solid #fff;
+				position: absolute;
+				top:50px;
+				left:8px;
+				color: #fff;
+				display: none;
+			}
+			#box .show{
+				display: block;
+			}
+			#box{
+				width: 400px;
+				height: 400px;
+				background: #333;
+				position: relative;
+			}
+			p {
+				width: 120px;
+				height: 30px;	
+				border: 1px solid #fff;
+				text-align: center;
+				line-height: 30px;
+				position: absolute;
+				bottom: 0;
+			}
+			#box div p:nth-child(1n){
+				left:0;
+			}
+			#box div p:nth-child(2n){
+				left:120px;
+			}
+			#box div p:nth-child(3n){
+				left:240px;
+			}
+			ul {
+				width: 310px;
+				height: 200px;
+				border: 1px solid #fff;
+				list-style: none;
+				position: absolute;
+				left: 20px;
+				top:60px;			
+			}
+			ul li {
+				color: #fff;
+				width: 310px;
+				height: 200px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<span class="active">按钮1</span>
+			<span>按钮2</span>
+			<span>按钮3</span>
+			<div class="show">
+				内容1
+				<p>1</p>
+				<p>2</p>
+				<p>3</p>
+				<ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+			<div>
+				内容2
+				<p>1</p>
+				<p>2</p>
+				<p>3</p>
+				<ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+			<div>
+				内容3
+				<p>1</p>
+				<p>2</p>
+				<p>3</p>
+				<ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			var spans = document.getElementsByTagName('span');
+			var divs = box.getElementsByTagName('div');
+			var n = 0;
+			var m = 0;
+			for (var i=0;i<spans.length;i++) {
+				spans[i].index = i;
+				spans[i].onclick = function(){
+					n = this.index;
+					tab();
+				}		
+			}
+			function tab(){			
+					for (var i=0;i<spans.length;i++) {
+						spans[i].className = '';
+						divs[i].className = '';
+					}
+					spans[n].className = 'active';
+					divs[n].className = 'show';	
+			}
+			for (var i=0;i<spans.length;i++) {
+				fn(i);
+			}
+			function fn(c){
+				console.log(c,divs[c])
+				var ps = divs[c].getElementsByTagName('p');
+				var lis = divs[c].getElementsByTagName('li');
+				ps[0].className = 'active';
+				lis[0].className = 'show';
+				for (var i=0;i<ps.length;i++) {
+					ps[i].index = i;
+					ps[i].onclick = function(){
+						m = this.index;
+						tab2();
+					}		
+				}				
+			}
+			function tab2(){	
+				var ps = divs[n].getElementsByTagName('p');
+				var lis = divs[n].getElementsByTagName('li');
+				for (var i=0;i<ps.length;i++) {
+					ps[i].className = '';
+					lis[i].className = '';
+				}
+				ps[m].className = 'active';
+				lis[m].className = 'show';	
+			}
+			var timer = null;
+			timer = setInterval(autoPlay,1000);
+			function autoPlay(){
+				m++;
+				var ps = divs[n].getElementsByTagName('p');
+				if (m == ps.length) {
+					n++;
+					m =0;
+					if (n == spans.length) {
+						n = 0;
+					}
+					tab();
+				}
+				tab2();
+			}
+			box.onmouseover = function(){
+				clearInterval(timer);
+			}
+			box.onmouseout = function(){
+				timer = setInterval(autoPlay,500);
+			}
+		</script>
+	</body>
+</html>
