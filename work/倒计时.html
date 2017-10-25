@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var target = new Date(2017,5,7,18,36,30);
+			/*
+			 	1m = 60s
+			 	1h = 3600s
+			 	1t = 86400s
+			 	
+			 	剩余天 = Math.floor(shyTime/86400)
+			 *  剩余时 = Math.floor(shyTime%86400/3600)
+			 *  剩余分 = Math.floor(shyTime%3600/60)
+			 *  剩余秒 = Math.floor(shyTime%60)
+			 * 
+			 * */
+			var timer = null;
+			timer = setInterval(function(){
+				var now = new Date();
+				//目标时间-当前时间 = 剩余时间，换算成秒
+				var shyTime = (target-now)/1000;
+				
+				if(shyTime>0){
+					//还有剩余时间，所以没到时间
+					var str = '';
+					var shyH = Math.floor(shyTime%86400/3600);
+					var shyM = Math.floor(shyTime%3600/60);
+					var shyS = Math.floor(shyTime%60);
+					str = shyH+':'+shyM+':'+shyS;
+					document.body.innerHTML = str;
+				}else{
+					//时间到了
+					alert('时间到了');
+					clearInterval(timer);	
+				}
+			},1000)
+		</script>
+	</body>
+</html>
