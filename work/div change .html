@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 50px;
+				height: 50px;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*
+			 	1.生成25个div
+			 	2.移入变色，限制只能变一次
+			 *  3.判断全移入过，控制颜色的n变化，每个div限制开关打开
+			 * 
+			 * */
+			var arr = ['red','yellow','blue','green'];
+			//控制当前颜色
+			var n = 0;
+			var str = '';
+			for(var i=0;i<25;i++){
+				str+='<div style="left:'+i%5*60+'px;top:'+Math.floor(i/5)*60+'px;background:'+arr[n]+';"></div>';
+			}
+			document.body.innerHTML = str;
+			
+			var divs = document.getElementsByTagName('div');
+			for(var i=0;i<divs.length;i++){
+				//控制单个div颜色
+				divs[i].n = n;
+				divs[i].onmouseover = function(){
+					//当前n==单个div的n，可以变色，div.n++，
+					if(this.n==n){
+						this.n++;
+						this.style.background = arr[this.n%arr.length];
+					}
+					//判断所有是否移入过
+					var m = 0;
+					for(var i=0;i<divs.length;i++){
+						//div.n不等于当前n，证明移入过了
+						if(divs[i].n!=n){
+							m++;
+						}
+					}
+					//全移入过，改变当前n
+					if(m==divs.length){
+						n++;
+					}	
+				}
+			}
+		</script>
+	</body>
+</html>
