@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box {
+				width: 100px;
+				height: 100px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+		<script type="text/javascript">
+			//归类
+			function Tab(){
+				this.box = document.getElementById(id);
+				this.btn = this.box.getElementsByTagName('input');
+				this.divs = this.box.getElementsByTagName('div');
+			}
+			//给按钮绑定事件，并执行某些事情
+			Tab.prototype.Event = function(){
+				var _this = this;
+				for(var i=0;i<this.btn.length;i++){
+					this.btn[i].index = i;
+					this.btn[i].onclick = function(){
+						_this.change(this);
+					}
+				}
+			}
+			Tab.prototype.change = function(that){
+				for(var i=0;i<this.btn.length;i++){
+					this.btn[i].className = this.divs[i].className = '';
+				}
+				that.className = 'active';
+				this.divs[that.index].className = 'show';
+			}
+			var t = new Tab(box);
+			t.Event();
+		</script>
+	</body>
+</html>
