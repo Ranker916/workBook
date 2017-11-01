@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				position: absolute;
+				border: 1px solid red;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			var box = document.getElementById('box');
+			var nL,nT;
+			var onOff = false;
+			document.onmousedown = function(ev){
+				box.style.display = 'block';
+				nL = ev.clientX;
+				nT = ev.clientY;
+				onOff = true;
+			}
+			document.onmousemove = function(ev){
+				if(onOff){
+					var dL = ev.clientX;
+					var dT = ev.clientY;
+					var w = Math.abs(nL-dL);
+					var h = Math.abs(nT-dT);
+					box.style.width = w+'px';
+					box.style.height = h+'px';
+					var l = nL>dL?dL:nL;
+					var t = nT>dT?dT:nT;
+					box.style.left = l+'px';
+					box.style.top = t+'px';
+				}	
+			}
+			document.onmouseup = function(){
+				box.style.cssText = '';
+				onOff = false;
+			}
+			
+		</script>
+	</body>
+</html>
