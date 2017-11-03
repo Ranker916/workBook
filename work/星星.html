@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 500px;
+				height: 500px;
+				border: 1px solid #000;
+				margin:50px auto 0;
+				position: relative;
+			}
+			#box div{
+				position: absolute;
+				font-size:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			var box = document.getElementById('box');
+			var maxT = box.clientHeight;
+			
+			box.onclick = function(ev){
+				//把点击坐标，生成星星个数传入
+				createStar({
+					x:ev.clientX,
+					y:ev.clientY
+				},10)
+			}
+			//随机颜色函数
+			function color(){
+				var arr = ['red','yellow','blue','green','pink','orange'];
+				var num = Math.round(Math.random()*(arr.length-1));
+				return arr[num];
+			}
+			function createStar(pos,num){
+				for(var i=0;i<num;i++){
+					star(pos);
+				}
+			}
+			//生成单个星星
+			function star(pos){
+				var div = document.createElement('div');
+				div.innerHTML = '★';
+				//随机颜色
+				div.style.color = color();
+				//起始位置
+				var l = pos.x-box.offsetLeft-div.offsetWidth/2;
+				var t = pos.y-box.offsetTop-div.offsetHeight/2;
+				div.style.left = l+'px';
+				div.style.top = t+'px';
+				box.appendChild(div);
+				//横向速度-5~5，负数向左，正数向右
+				var x = Math.round(Math.random()*10-5);
+				//竖向速度，-10~-20，负数向上，正数向下
+				var y = Math.round(Math.random()*10-20);
+				div.timer = setInterval(function(){
+					div.style.left = (l+=x)+'px';
+					//y每次加1，y一开始负数向上走，当y是正数后，向下
+					div.style.top = (t+=++y)+'px';
+					//到下边界关定时器，移除元素
+					if(t>=maxT){
+						clearInterval(div.timer);
+						box.removeChild(div);
+					}
+				},20)
+			}
+		</script>
+	</body>
+</html>
